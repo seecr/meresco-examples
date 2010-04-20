@@ -54,7 +54,7 @@ from amara.binderytools import bind_file, bind_string
 from weightless import Reactor
 from cq2utils import CQ2TestCase, getRequest, postRequest, wheelOfTime
 
-from merescocore.framework import be
+from meresco.core import be
 
 from meresco.examples.dna.server import dna, config
 

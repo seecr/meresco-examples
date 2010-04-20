@@ -31,15 +31,15 @@ from sys import stdout
 from os.path import join, isdir
 from os import makedirs
 
-from merescocore.framework import be, Observable, TransactionScope, ResourceManager, Transparant
+from meresco.core import be, Observable, TransactionScope, ResourceManager, Transparant
 
-from merescocore.components import StorageComponent, FilterField, RenameField, XmlParseLxml, XmlXPath, XmlPrintLxml, Xml2Fields, Venturi, FilterMessages, Amara2Lxml, RewritePartname, Rss, RssItem, Lxml2Amara
+from meresco.components import StorageComponent, FilterField, RenameField, XmlParseLxml, XmlXPath, XmlPrintLxml, Xml2Fields, Venturi, FilterMessages, Amara2Lxml, RewritePartname, Rss, RssItem, Lxml2Amara
 from merescocomponents.facetindex import Drilldown, LuceneIndex, CQL2LuceneQuery, Fields2LuceneDocumentTx
 from merescocomponents.facetindex.tools import unlock
-from merescocore.components.drilldown import SRUTermDrilldown, DrilldownFieldnames
-from merescocore.components.http import PathFilter, ObservableHttpServer
-from merescocore.components.http.webrequestserver import WebRequestServer
-from merescocore.components.sru import SruParser, SruHandler, SRURecordUpdate
+from meresco.components.drilldown import SRUTermDrilldown, DrilldownFieldnames
+from meresco.components.http import PathFilter, ObservableHttpServer
+from meresco.components.http.webrequestserver import WebRequestServer
+from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
 from merescocomponents.oai import OaiPmh, OaiJazz, OaiAddRecordWithDefaults
 
 from weightless import Reactor
