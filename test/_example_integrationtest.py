@@ -2,7 +2,7 @@
 ## begin license ##
 #
 #    Meresco Examples is a project demonstrating some of the features of
-#    various Meresco components
+#    various Meresco components.
 #    Copyright (C) 2007-2008 SURF Foundation. http://www.surf.nl
 #    Copyright (C) 2007-2009 Stichting Kennisnet Ict op school.
 #       http://www.kennisnetictopschool.nl
