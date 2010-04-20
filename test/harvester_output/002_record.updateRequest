@@ -1,0 +1,25 @@
+<updateRequest>
+    <srw:version xmlns:srw="http://www.loc.gov/zing/srw/">1.0</srw:version>
+    <ucp:action xmlns:ucp="http://www.loc.gov/ucp">info:srw/action/1/replace</ucp:action>
+    <ucp:recordIdentifier xmlns:ucp="http://www.loc.gov/ucp">meresco:record:2</ucp:recordIdentifier>
+    <srw:record xmlns:srw="http://www.loc.gov/zing/srw/">
+        <srw:recordPacking>xml</srw:recordPacking>
+        <srw:recordSchema>metadata</srw:recordSchema>
+        <srw:recordData><document xmlns="http://meresco.org/namespace/harvester/document"><part name="metadata">&lt;metadata xmlns="http://www.openarchives.org/OAI/2.0/"&gt;
+&lt;oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/      http://www.openarchives.org/OAI/2.0/oai_dc.xsd"&gt;
+&lt;dc:identifier xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;http://meresco.com?record=2&lt;/dc:identifier&gt;
+&lt;dc:title xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Example Program 2&lt;/dc:title&gt;
+&lt;dc:description xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;This is an example program about Programming with Meresco&lt;/dc:description&gt;
+&lt;dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Seek You Too&lt;/dc:creator&gt;
+&lt;dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Seek You too&lt;/dc:publisher&gt;
+&lt;dc:date xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;2008&lt;/dc:date&gt;
+&lt;dc:type xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Example&lt;/dc:type&gt;
+&lt;dc:subject xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Programming&lt;/dc:subject&gt;
+&lt;dc:language xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;en&lt;/dc:language&gt;
+&lt;dc:rights xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;Open Source&lt;/dc:rights&gt;
+&lt;/oai_dc:dc&gt;&lt;/metadata&gt;
+                </part><part name="header">&lt;header xmlns="http://www.openarchives.org/OAI/2.0/"&gt;&lt;identifier&gt;record:2&lt;/identifier&gt;&lt;datestamp&gt;2008-12-15T14:08:34Z&lt;/datestamp&gt;&lt;/header&gt;</part>
+            </document>
+        </srw:recordData>
+    </srw:record>
+</updateRequest>
