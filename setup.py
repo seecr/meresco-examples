@@ -28,7 +28,6 @@ from distutils.core import setup
 setup(
     name = 'meresco-examples',
     packages = [
-        'meresco',
         'meresco.examples',
         'meresco.examples.dna',
     ],
