@@ -36,8 +36,8 @@ setup(
     url = 'http://www.cq2.nl',
     author = 'Seek You Too',
     author_email = 'info@cq2.nl',
-    description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.'
-    long_description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.'
+    description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.',
+    long_description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.',
     license = 'GPL',
     platforms='all',
 )
