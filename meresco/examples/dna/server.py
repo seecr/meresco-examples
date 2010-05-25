@@ -8,6 +8,7 @@
 #    Copyright (C) 2009 Delft University of Technology http://www.tudelft.nl
 #    Copyright (C) 2009 Tilburg University http://www.uvt.nl
 #    Copyright (C) 2007-2010 Seek You Too (CQ2) http://www.cq2.nl
+#    Copyright (C) 2010 Stichting Kennisnet http://www.kennisnet.nl
 #
 #    This file is part of Meresco Examples.
 #
@@ -34,9 +35,9 @@ from os import makedirs
 from meresco.core import be, Observable, TransactionScope, ResourceManager, Transparant
 
 from meresco.components import StorageComponent, FilterField, RenameField, XmlParseLxml, XmlXPath, XmlPrintLxml, Xml2Fields, Venturi, FilterMessages, Amara2Lxml, RewritePartname, Rss, RssItem, Lxml2Amara
-from meresco.components.facetindex import Drilldown, LuceneIndex, CQL2LuceneQuery, Fields2LuceneDocumentTx
+from meresco.components.facetindex import Drilldown, LuceneIndex, CQL2LuceneQuery, Fields2LuceneDocumentTx, DrilldownFieldnames
 from meresco.components.facetindex.tools import unlock
-from meresco.components.drilldown import SRUTermDrilldown, DrilldownFieldnames
+from meresco.components.drilldown import SRUTermDrilldown
 from meresco.components.http import PathFilter, ObservableHttpServer
 from meresco.components.http.webrequestserver import WebRequestServer
 from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
@@ -134,8 +135,7 @@ def dna(reactor,  host, portNumber, databasePath):
                             (storageComponent,),
                             (SRUTermDrilldown(),
                                 (DrilldownFieldnames(
-                                    lambda field: DRILLDOWN_PREFIX + field,
-                                    lambda field: field[len(DRILLDOWN_PREFIX):]),
+                                    lambda field: DRILLDOWN_PREFIX + field,),
                                         (drilldownComponent,)
                                 ),
                                 (CQL2LuceneQuery(unqualifiedTermFields),
