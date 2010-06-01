@@ -1,1 +1,2 @@
-python-meresco-components-3.0-beta (>= 13)
+python-meresco-components-3.0-beta (>= 15)
+python-meresco-oai-3.0-beta (>= 0)

@@ -41,7 +41,7 @@ from meresco.components.drilldown import SRUTermDrilldown
 from meresco.components.http import PathFilter, ObservableHttpServer
 from meresco.components.http.webrequestserver import WebRequestServer
 from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
-from meresco.components.oai import OaiPmh, OaiJazz, OaiAddRecordWithDefaults
+from meresco.oai import OaiPmh, OaiJazz, OaiAddRecordWithDefaults
 
 from weightless import Reactor
 
