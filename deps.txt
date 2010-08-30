@@ -1,2 +1,2 @@
-python-meresco-components3.0
-python-meresco-oai3.0
+python-meresco-components3.2
+python-meresco-oai3.1
