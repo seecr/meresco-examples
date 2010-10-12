@@ -1,4 +1,2 @@
-python-meresco-components (>= 3.2)
-python-meresco-components (<< 3.3)
-python-meresco-oai (>= 3.1)
-python-meresco-oai (<< 3.2)
+python-meresco-components (>= 3.4)
+python-meresco-oai (>= 3.2)
