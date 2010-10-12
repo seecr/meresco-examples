@@ -94,13 +94,13 @@ class IntegrationTest(CQ2TestCase):
 
     def testOaiIdentify(self):
         header, body = getRequest(reactor, port, '/oai', {'verb': 'Identify'})
-        self.assertEquals('HTTP/1.0 200 Ok\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         self.assertEquals('Meresco Example Repository', body.OAI_PMH.Identify.repositoryName)
         self.assertEquals('admin@example.org', body.OAI_PMH.Identify.adminEmail)
 
     def testOaiListRecords(self):
         header, body = getRequest(reactor, port, '/oai', {'verb': 'ListRecords', 'metadataPrefix': 'oai_dc'})
-        self.assertEquals('HTTP/1.0 200 Ok\r\nContent-Type: text/xml; charset=utf-8', header)
+        self.assertEquals('HTTP/1.0 200 OK\r\nContent-Type: text/xml; charset=utf-8', header)
         self.assertEquals(3, len(body.OAI_PMH.ListRecords.record))
 
     def testDeleteRecord(self):

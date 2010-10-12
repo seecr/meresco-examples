@@ -78,7 +78,7 @@ def createUploadHelix(indexHelix, storageComponent, oaiJazz):
                         indexHelix
                     ),
                     (XmlXPath(['/oai:metadata/oai_dc:dc']),
-                        (XmlPrintLxml(),
+                        (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data'),
                             (RewritePartname('oai_dc'),
                                 (storageComponent,)
                             )
@@ -99,11 +99,6 @@ def createUploadHelix(indexHelix, storageComponent, oaiJazz):
                             )
                         )
                     ),
-                    (XmlXPath(['/oai:header']),
-                        (Lxml2Amara(),
-                            (oaiJazz,)
-                        )
-                    )
                 )
             )
         )
@@ -147,7 +142,7 @@ def dna(reactor,  host, portNumber, databasePath):
                 ),
                 (PathFilter("/update"),
                     (SRURecordUpdate(),
-                        (Amara2Lxml(),
+                        (Amara2Lxml(fromKwarg='amaraNode', toKwarg='lxmlNode'),
                             createUploadHelix(indexHelix, storageComponent, oaiJazz)
                         )
                     )
@@ -174,12 +169,10 @@ def dna(reactor,  host, portNumber, databasePath):
                     )
                 ),
                 (PathFilter('/oai'),
-                    (WebRequestServer(),
-                        (OaiPmh(repositoryName='Meresco Example Repository',
-                            adminEmail='admin@example.org'),
-                            (oaiJazz,),
-                            (storageComponent,),
-                        )
+                    (OaiPmh(repositoryName='Meresco Example Repository',
+                        adminEmail='admin@example.org'),
+                        (oaiJazz,),
+                        (storageComponent,),
                     )
                 ),
             )
