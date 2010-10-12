@@ -21,3 +21,16 @@ Introduction
 Meresco Suite is still growing with a lot of components providing all kinds of features. This project will create an example application build on these components to ease your own Meresco based development.
 
 For more information see http://example.meresco.org
+
+
+Ideas
+=====
+
+The ideas for the example project contain, but are not limited to:
+
+    - All in one project, including Harvester
+
+    - Everything document inside this project
+
+    - Show a lot of different features, each feature is
+      well explained in the Application DNA.
