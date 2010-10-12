@@ -10,12 +10,10 @@
 :Organization: `Seek You Too`_
 :Version: 0.1
 :Copyright: 2010 by Seek You Too
-:License: |by-nc-nd|_ Attribution-Noncommercial-No Derivative Works 3.0 License
+:License: `GNU General Public License 2.0`_
 
 .. _`Seek You Too`: http://www.cq2.nl
-.. |by-nc-nd| image:: images/by-nc-nd.png
-    :alt: 
-.. _by-nc-nd: http://creativecommons.org/licenses/by-nc-nd/3.0/
+.. _`GNU General Public License 2.0`: http://creativecommons.org/licenses/GPL/2.0/
 
 Introduction
 ============
