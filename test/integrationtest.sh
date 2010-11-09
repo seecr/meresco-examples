@@ -23,5 +23,5 @@
 #
 ## end license ##
 
-export PYTHONPATH=.
+export PYTHONPATH=.:"$PYTHONPATH"
 python2.5 _integrationtest.py
