@@ -35,4 +35,4 @@ cp $(dirname $testfile)/simplexmlserver.py .
 (
 python2.5 $(basename $testfile)
 )
-rm simplexmlserver.py simplexmlserverintegrationtest.py
+rm simplexmlserver.py* simplexmlserverintegrationtest.py*
