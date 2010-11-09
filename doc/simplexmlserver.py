@@ -43,9 +43,9 @@ from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
 from weightless import Reactor
 
 class SetIdentifier(Observable):
-    def add(self, identifier, partname, data):
-        self.tx.locals['id'] = identifier
-        yield self.all.add(identifier, partname, data)
+    def add(self, identifier, **kwargs):
+        self.ctx.tx.locals['id'] = identifier
+        yield self.all.add(identifier, **kwargs)
 
 def dna(reactor,  host, portNumber, databasePath):
     unlock(join(databasePath, 'index'))
@@ -83,10 +83,10 @@ def dna(reactor,  host, portNumber, databasePath):
                         # Convert the Amara based xml object from the
                         # SRUupdate component into an Lxml based xml object
                         # for futher processing.
-                        (Amara2Lxml(),
+                        (Amara2Lxml(fromKwarg="amaraNode", toKwarg="lxmlNode"),
                             # Convert the Lxml based xml object into plain
                             # text
-                            (XmlPrintLxml(),
+                            (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data'),
                                 # Store the data in the storage
                                 (storageComponent,)
                             ),
