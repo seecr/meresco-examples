@@ -39,7 +39,6 @@ from meresco.components.facetindex import Drilldown, LuceneIndex, CQL2LuceneQuer
 from meresco.components.facetindex.tools import unlock
 from meresco.components.drilldown import SRUTermDrilldown
 from meresco.components.http import PathFilter, ObservableHttpServer
-from meresco.components.http.webrequestserver import WebRequestServer
 from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
 from meresco.oai import OaiPmh, OaiJazz, OaiAddRecordWithDefaults
 
