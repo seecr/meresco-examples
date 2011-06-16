@@ -90,7 +90,7 @@ class IntegrationTest(CQ2TestCase):
         self.assertEquals([(1, 'Programming'), (1, 'Search')], itemValues)
 
     def testRSS(self):
-        body = self._doQuery({'query': 'dc.title = program'}, path="/rss")
+        body = self._doQuery({'query': 'dc.title=program'}, path="/rss")
         items = [(str(item.title), str(item.description), str(item.link).split('?', 1)[1]) for item in body.rss.channel.item]
         self.assertEquals(2, len(items))
         self.assertEquals([('Example Program 1', 'This is an example program about Search with Meresco', 'operation=searchRetrieve&version=1.1&query=dc.identifier%3Dhttp%3A//meresco.com%3Frecord%3D1'), ('Example Program 2', 'This is an example program about Programming with Meresco', 'operation=searchRetrieve&version=1.1&query=dc.identifier%3Dhttp%3A//meresco.com%3Frecord%3D2')], items)
