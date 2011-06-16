@@ -7,12 +7,13 @@
  Example application showing some of the components from the Meresco Suite
 ---------------------------------------------------------------------------
 :Authors: Thijs Janssen
-:Organization: `Seek You Too`_
+:Organization: `Seecr`_
 :Version: 0.1
 :Copyright: 2010 by Seek You Too
+:Copyright: 2011 by Seecr (Seek You Too B.V.)
 :License: `GNU General Public License 2.0`_
 
-.. _`Seek You Too`: http://www.cq2.nl
+.. _`Seecr`: http://seecr.nl
 .. _`GNU General Public License 2.0`: http://creativecommons.org/licenses/GPL/2.0/
 
 Introduction
