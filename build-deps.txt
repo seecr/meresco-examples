@@ -1,0 +1,4 @@
+python-cq2utils (>= 5.4.15)
+python-cq2utils (<< 5.5)
+python-amara (>= 1.2a2)
+python-amara (<< 1.3)

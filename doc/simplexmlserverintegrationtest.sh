@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
+#!/bin/bash
 ## begin license ##
 # 
 # "Meresco Examples" is a project demonstrating some of the
 # features of various components of the "Meresco Suite".
 # Also see http://meresco.org. 
 # 
-# Copyright (C) 2010 Seek You Too (CQ2) http://www.cq2.nl
 # Copyright (C) 2011 Seecr (Seek You Too B.V.) http://seecr.nl
 # 
 # This file is part of "Meresco Examples"
@@ -26,20 +25,5 @@
 # 
 ## end license ##
 
-from distutils.core import setup
-
-setup(
-    name = 'Meresco-Examples',
-    packages = [
-        'meresco.examples',
-        'meresco.examples.dna',
-    ],
-    version = '%VERSION%',
-    url = 'http://www.cq2.nl',
-    author = 'Seek You Too',
-    author_email = 'info@cq2.nl',
-    description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.',
-    long_description = 'Meresco Examples is a project demonstrating some of the features of various Meresco components.',
-    license = 'GPL',
-    platforms='all',
-)
+export PYTHONPATH=.:"$PYTHONPATH"
+python2.5 _simplexmlserverintegrationtest.py

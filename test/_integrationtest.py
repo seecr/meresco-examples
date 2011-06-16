@@ -10,6 +10,7 @@
 # Copyright (C) 2007-2009 Stichting Kennisnet Ict op school. http://www.kennisnetictopschool.nl
 # Copyright (C) 2009 Delft University of Technology http://www.tudelft.nl
 # Copyright (C) 2009 Tilburg University http://www.uvt.nl
+# Copyright (C) 2011 Seecr (Seek You Too B.V.) http://seecr.nl
 # 
 # This file is part of "Meresco Examples"
 # 
@@ -53,7 +54,7 @@ from glob import glob
 
 from amara.binderytools import bind_file, bind_string
 
-from weightless import Reactor
+from weightless.io import Reactor
 from cq2utils import CQ2TestCase, getRequest, postRequest, wheelOfTime
 
 from meresco.core import be

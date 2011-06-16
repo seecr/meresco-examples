@@ -9,6 +9,7 @@
 # Copyright (C) 2007-2009 Stichting Kennisnet Ict op school. http://www.kennisnetictopschool.nl
 # Copyright (C) 2009 Delft University of Technology http://www.tudelft.nl
 # Copyright (C) 2009 Tilburg University http://www.uvt.nl
+# Copyright (C) 2011 Seecr (Seek You Too B.V.) http://seecr.nl
 # 
 # This file is part of "Meresco Examples"
 # 
@@ -41,7 +42,7 @@ from meresco.components.facetindex import LuceneIndex, CQL2LuceneQuery, Fields2L
 from meresco.components.facetindex.tools import unlock
 from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
 
-from weightless import Reactor
+from weightless.io import Reactor
 
 class SetIdentifier(Observable):
     def add(self, identifier, **kwargs):

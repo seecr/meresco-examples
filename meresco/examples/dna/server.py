@@ -10,6 +10,7 @@
 # Copyright (C) 2009 Delft University of Technology http://www.tudelft.nl
 # Copyright (C) 2009 Tilburg University http://www.uvt.nl
 # Copyright (C) 2010 Stichting Kennisnet http://www.kennisnet.nl
+# Copyright (C) 2011 Seecr (Seek You Too B.V.) http://seecr.nl
 # 
 # This file is part of "Meresco Examples"
 # 
@@ -44,7 +45,7 @@ from meresco.components.http import PathFilter, ObservableHttpServer
 from meresco.components.sru import SruParser, SruHandler, SRURecordUpdate
 from meresco.oai import OaiPmh, OaiJazz, OaiAddRecordWithDefaults
 
-from weightless import Reactor
+from weightless.io import Reactor
 
 DRILLDOWN_PREFIX = 'drilldown.'
 drilldownFieldnames = ['drilldown.dc.subject']
