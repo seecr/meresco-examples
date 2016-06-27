@@ -26,6 +26,7 @@
 
 from seecr.test import IntegrationTestCase
 from seecr.test.utils import getRequest
+from meresco.components import lxmltostring
 from meresco.xml import xpathFirst, xpath
 
 class ApiTest(IntegrationTestCase):
@@ -52,6 +53,13 @@ class ApiTest(IntegrationTestCase):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix="oai_dc"))
         records = xpath(body, '//oai:record/oai:metadata')
         self.assertEqual(2, len(records))
+
+    def testRSS(self):
+        header, body = getRequest(self.apiPort, '/rss', dict(query="dc:title=program"))
+        items = xpath(body, "/rss/channel/item")
+        self.assertEquals(2, len(items))
+        self.assertEqual(set(["Example Program 1", "Example Program 2"]), set(xpath(body, "//item/title/text()")))
+        self.assertEqual(set(["This is an example program about Search with Meresco", "This is an example program about Programming with Meresco"]), set(xpath(body, "//item/description/text()")))
 
     def doSruQuery(self, **arguments):
         queryArguments = {'version': '1.2', 'operation': 'searchRetrieve'}

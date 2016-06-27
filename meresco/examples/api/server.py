@@ -41,7 +41,7 @@ from meresco.core import Observable, decorateWith
 from meresco.core.alltodo import AllToDo
 from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 
-from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, lxmltostring, PeriodicCall, Schedule
+from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, lxmltostring, PeriodicCall, Schedule, Rss, RssItem
 from meresco.components.cql import SearchTermFilterAndModifier
 from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer
@@ -281,6 +281,27 @@ def main(reactor, port, statePath, indexPort, gatewayPort, **ignored):
                                             )
                                         )
                                     )
+                                )
+                            ),
+                            (PathFilter('/rss'),
+                                (Rss(   title = 'Meresco',
+                                        description = 'RSS feed for Meresco',
+                                        link = 'http://meresco.org',
+                                        maximumRecords = 15),
+                                    executeQueryHelix,
+                                    (RssItem(
+                                            nsMap={
+                                                'dc': "http://purl.org/dc/elements/1.1/",
+                                                'oai_dc': "http://www.openarchives.org/OAI/2.0/oai_dc/"
+                                            },
+                                            title = ('oai_dc', '/oai_dc:dc/dc:title/text()'),
+                                            description = ('oai_dc', '/oai_dc:dc/dc:description/text()'),
+                                            linkTemplate = 'http://localhost/sru?operation=searchRetrieve&version=1.2&query=dc:identifier%%3D%(identifier)s',
+                                            identifier = ('oai_dc', '/oai_dc:dc/dc:identifier/text()')),
+                                        (StorageAdapter(),
+                                            (storage,)
+                                        )
+                                    ),
                                 )
                             ),
                             (PathFilter('/log'),
