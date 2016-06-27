@@ -26,7 +26,6 @@
 
 from seecr.test import IntegrationTestCase
 from seecr.test.utils import getRequest
-from meresco.components import lxmltostring
 from meresco.xml import xpathFirst, xpath
 
 class ApiTest(IntegrationTestCase):

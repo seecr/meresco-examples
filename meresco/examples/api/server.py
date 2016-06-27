@@ -30,18 +30,14 @@ import sys
 from os.path import join, dirname, abspath
 
 from weightless.core import be, consume
-from weightless.http import httpget
 from weightless.io import Reactor
 
-from cqlparser import CQLParseException, CQLTokenizerException, UnsupportedCQL
-
 from meresco.components.drilldown import SruTermDrilldown
-from meresco.components.web import WebQuery
-from meresco.core import Observable, decorateWith
+from meresco.core import Observable
 from meresco.core.alltodo import AllToDo
 from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 
-from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, lxmltostring, PeriodicCall, Schedule, Rss, RssItem
+from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, PeriodicCall, Schedule, Rss, RssItem
 from meresco.components.cql import SearchTermFilterAndModifier
 from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer
@@ -58,12 +54,6 @@ from seecr.utils import DebugPrompt
 
 from meresco.components.drilldownqueries import DrilldownQueries
 from meresco.distributed.compositestate import CompositeState
-from sys import stderr
-from StringIO import StringIO
-from lxml.etree import parse
-from xml.sax.saxutils import escape as escapeHtml
-from urllib import quote, unquote
-from collections import defaultdict
 from storage import StorageComponent
 from storage.storageadapter import StorageAdapter
 
@@ -73,52 +63,6 @@ from meresco.examples.index.server import untokenizedFieldname, untokenizedField
 myDir = dirname(abspath(__file__))
 infoPath = join(myDir, 'info')
 dynamicPath = join(myDir, 'dynamic')
-
-DRILLDOWN_MAXIMUM = 250
-MAXIMUM_RECORDS = 30
-
-MATCHES = []
-
-class SysStream(object):
-    """Forces the use of the current system stream with the given name (so that stdout_replaced and stderr_replaced work)."""
-    def __init__(self, streamName):
-        assert streamName in ['stdout', 'stderr']
-        self._streamName = streamName
-
-    def __getattr__(self, attr):
-        return getattr(getattr(sys, self._streamName), attr)
-
-ADDITIONAL_GLOBALS = {
-    'stderr': stderr,
-    'httpget': httpget,
-    'StringIO': StringIO,
-    'parse': parse,
-    'lxmltostring': lxmltostring,
-    'escapeHtml': escapeHtml,
-    'quote': lambda s: quote(s, safe=''),
-    # exception handling for WebQuery / CQL
-    'CQLParseException': CQLParseException,
-    'CQLTokenizerException': CQLTokenizerException,
-    'UnsupportedCQL': UnsupportedCQL,
-    'WebQuery': WebQuery,
-    'classmethod': classmethod,
-    'bool': bool,
-    'defaultdict': defaultdict,
-    'decorateWith': decorateWith,
-    'unquote': unquote,
-}
-
-
-def _cqlClausePrint(node):
-    #SEARCH_CLAUSE(INDEX(TERM(...)), RELATION(COMPARITOR(...)), SEARCH_TERM(...))
-    if len(node.children) == 3:
-        fieldname = node.children[0].children[0].children[0]
-        relation = node.children[1].children[0].children[0]
-        value = node.children[2].children[0].children[0]
-        print "%s %s %s" % (fieldname, relation, value)
-    return False
-cqlPrintingFilterAndModifier = _cqlClausePrint, None
-
 
 def createDownloadHelix(reactor, periodicDownload, oaiDownload, storageComponent, oaiJazz):
     return \
@@ -186,7 +130,7 @@ def main(reactor, port, statePath, indexPort, gatewayPort, **ignored):
 
     convertToComposedQuery = ConvertToComposedQuery(
             resultsFrom=DEFAULT_CORE,
-            matches=MATCHES,
+            matches=[],
             drilldownFieldnamesTranslate=drilldownFieldnamesTranslate
         )
 
@@ -265,13 +209,11 @@ def main(reactor, port, statePath, indexPort, gatewayPort, **ignored):
                                             host='example.org',
                                             port=80,
                                             defaultRecordSchema=DEFAULT_CORE,
-                                            defaultRecordPacking='xml',
-                                            maximumMaximumRecords=MAXIMUM_RECORDS),
+                                            defaultRecordPacking='xml'),
                                         (SruLimitStartRecord(limitBeyond=1000),
                                             (SruHandler(
                                                     includeQueryTimes=True,
-                                                    drilldownMaximumMaximumResults=DRILLDOWN_MAXIMUM,
-                                                    extraXParameters=['x-filter', 'x-rank-query', 'x-filter-common-keys', 'x-drilldown-query', 'x-apikey-filter'],
+                                                    extraXParameters=[],
                                                     enableCollectLog=True),
                                                 (SruTermDrilldown(),),
                                                 executeQueryHelix,
