@@ -45,6 +45,7 @@ class ExampleIntegrationState(IntegrationState):
         self.testdataDir = join(dirname(mydir), 'data')
         self.gatewayPort = PortNumberGenerator.next()
         self.indexPort = PortNumberGenerator.next()
+        self.apiPort = PortNumberGenerator.next()
         self.lucenePort = PortNumberGenerator.next()
 
     def binDir(self):
@@ -52,8 +53,9 @@ class ExampleIntegrationState(IntegrationState):
 
     def setUp(self):
         self.startGatewayServer()
-        self.startIndexServer()
         self.startLuceneServer()
+        self.startIndexServer()
+        self.startApiServer()
         self.waitForServicesStarted()
         self._createDatabase()
         sleep(0.2)
@@ -82,6 +84,19 @@ class ExampleIntegrationState(IntegrationState):
             stateDir=join(self.integrationTempdir, 'index'),
             waitForStart=False)
 
+    def startApiServer(self):
+        executable = self.binPath('start-api')
+        self._startServer(
+            serviceName='api',
+            executable=executable,
+            serviceReadyUrl='http://localhost:%s/info/version' % self.apiPort,
+            cwd=dirname(abspath(executable)),
+            port=self.apiPort,
+            indexPort=self.indexPort,
+            gatewayPort=self.gatewayPort,
+            stateDir=join(self.integrationTempdir, 'api'),
+            waitForStart=False)
+
     def startLuceneServer(self):
         self._startServer(
             'lucene',
@@ -102,7 +117,7 @@ class ExampleIntegrationState(IntegrationState):
         try:
             for f in listdir(self.testdataDir):
                 postRequest(self.gatewayPort, '/update', data=open(join(self.testdataDir, f)).read(), parse=False)
-            sleepWheel(5)
+            sleepWheel(2)
             print "Finished creating database in %s seconds" % (time() - start)
         except Exception:
             print 'Error received while creating database for', self.stateName

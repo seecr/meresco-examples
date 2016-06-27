@@ -23,7 +23,7 @@
 #
 ## end license ##
 
-from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall
+from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter, Deproxy
 from meresco.components.log import ApacheLogWriter
 from meresco.components.sru import SruRecordUpdate
@@ -63,7 +63,7 @@ def main(reactor, port, statePath, **ignored):
     storeComponent = StorageComponent(join(statePath, 'store'))
 
     scheduledCommitPeriodicCall = be(
-        (PeriodicCall(reactor, message='commit', autoStart=False, name='Scheduled commit'),
+        (PeriodicCall(reactor, message='commit', name='Scheduled commit', schedule=Schedule(period=1)),
             (AllToDo(),
                 (storeComponent,),
                 (oaiJazz,)
@@ -103,7 +103,6 @@ def main(reactor, port, statePath, **ignored):
                         (SruRecordUpdate(
                                 sendRecordData=False,
                                 logErrors=True,
-                                enableCollectLog=True,
                             ),
                             (RewritePartname('oai_dc'),
                                 (FilterMessages(allowed=['delete']),

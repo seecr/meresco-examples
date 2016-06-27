@@ -38,7 +38,7 @@ from meresco.core.alltodo import AllToDo
 from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter
-from meresco.components import PeriodicDownload, FilterMessages, XmlXPath, XmlParseLxml, PeriodicCall
+from meresco.components import PeriodicDownload, FilterMessages, XmlXPath, XmlParseLxml, PeriodicCall, Schedule
 from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogComponent
 from meresco.distributed import CompositeState
 
@@ -163,10 +163,11 @@ def writerMain(writerReactor, readerReactor, readerPort, statePath, serverPort, 
         autoCommit=False)
 
     scheduledCommitPeriodicCall = be(
-        (PeriodicCall(writerReactor, message='commit', autoStart=False, name='Scheduled commit'),
+        (PeriodicCall(writerReactor, message='commit', name='Scheduled commit', schedule=Schedule(period=1), initialSchedule=Schedule(period=1)),
             (AllToDo(),
                 (periodicDownload,),
                 (LuceneCommit(host='localhost', port=serverPort,),
+                    (LogComponent(),),
                     (http11Request,),
                 )
             )
