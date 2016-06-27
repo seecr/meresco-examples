@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 ## begin license ##
 #
 # "Meresco Examples" is a project demonstrating some of the
 # features of various components of the "Meresco Suite".
 # Also see http://meresco.org.
 #
-# Copyright (C) 2010 Seek You Too (CQ2) http://www.cq2.nl
-# Copyright (C) 2011, 2016 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2015 Drents Archief http://www.drentsarchief.nl
+# Copyright (C) 2015-2016 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Meresco Examples"
 #
@@ -26,5 +27,21 @@
 #
 ## end license ##
 
-export PYTHONPATH=.:"$PYTHONPATH"
-python _integrationtest.py
+from seecrdeps import includeParentAndDeps        #DO_NOT_DISTRIBUTE
+includeParentAndDeps(__file__)                    #DO_NOT_DISTRIBUTE
+
+from seecr.utils import isRootUser
+from meresco.components import ParseArguments
+
+if __name__ == '__main__':
+    if isRootUser():
+        print "Do not run as root user!"
+        exit(2)
+
+    parser = ParseArguments()
+    parser.addOption('-p', '--port', type='int', help="Default port number", mandatory=True)
+    parser.addOption('', '--stateDir', help="Directory to write state.", mandatory=True)
+    options, arguments =  parser.parse()
+
+    from meresco.examples.gateway.server import startServer
+    startServer(**vars(options))

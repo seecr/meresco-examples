@@ -1,12 +1,10 @@
-#!/bin/bash
 ## begin license ##
 #
 # "Meresco Examples" is a project demonstrating some of the
 # features of various components of the "Meresco Suite".
 # Also see http://meresco.org.
 #
-# Copyright (C) 2010 Seek You Too (CQ2) http://www.cq2.nl
-# Copyright (C) 2011, 2016 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2016 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Meresco Examples"
 #
@@ -26,5 +24,4 @@
 #
 ## end license ##
 
-export PYTHONPATH=.:"$PYTHONPATH"
-python _integrationtest.py
+from integrationstate import ExampleIntegrationState
