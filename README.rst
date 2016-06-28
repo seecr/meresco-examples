@@ -26,8 +26,8 @@ Ideas
 
 The ideas for the example project contain, but are not limited to:
 
- - All in one project, including Harvester
+- All in one project, including Harvester
 
- - Everything document inside this project
+- Everything document inside this project
 
- - Show a lot of different features, each feature is well explained in the Application DNA.
+- Show a lot of different features, each feature is well explained in the Application DNA.
