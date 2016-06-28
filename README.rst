@@ -10,7 +10,7 @@
 :Organization: `Seecr`_
 :Version: 0.1
 :Copyright: 2010 by Seek You Too
-:Copyright: 2011 by Seecr (Seek You Too B.V.)
+:Copyright: 2011-2016 by Seecr (Seek You Too B.V.)
 :License: `GNU General Public License 2.0`_
 
 .. _`Seecr`: http://seecr.nl
@@ -21,17 +21,13 @@ Introduction
 
 Meresco Suite is still growing with a lot of components providing all kinds of features. This project will create an example application build on these components to ease your own Meresco based development.
 
-For more information see http://example.meresco.org
-
-
 Ideas
 =====
 
 The ideas for the example project contain, but are not limited to:
 
-    - All in one project, including Harvester
+ - All in one project, including Harvester
 
-    - Everything document inside this project
+ - Everything document inside this project
 
-    - Show a lot of different features, each feature is
-      well explained in the Application DNA.
+ - Show a lot of different features, each feature is well explained in the Application DNA.
