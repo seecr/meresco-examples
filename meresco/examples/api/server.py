@@ -190,6 +190,7 @@ def main(reactor, port, statePath, indexPort, gatewayPort, **ignored):
                         scopeNames=('http-scope',)
                     ),
                 ),
+                (QueryLogWriter(log=directoryLog, scopeNames=('sru-scope',)),),
                 (Deproxy(),
                     (HandleRequestLog(),
                         (BasicHttpHandler(),
