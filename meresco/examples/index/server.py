@@ -39,8 +39,7 @@ from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter
 from meresco.components import PeriodicDownload, FilterMessages, XmlXPath, XmlParseLxml, PeriodicCall, Schedule
-from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogComponent
-from meresco.distributed import CompositeState
+from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog
 
 from meresco.lucene.lucenecommit import LuceneCommit
 from meresco.lucene.queryexpressiontolucenequerydict import QueryExpressionToLuceneQueryDict
@@ -90,7 +89,7 @@ def luceneAndReaderConfig(reactor, statePath, defaultLuceneSettings, httpRequest
     ))
     return luceneIndex
 
-def readerMain(reactor, statePath, port, downloadProcessorStates, defaultLuceneSettings, serverPort):
+def readerMain(reactor, statePath, port, defaultLuceneSettings, serverPort):
     apacheLogStream = stdout
 
     http11Request = be(
@@ -173,16 +172,11 @@ def writerMain(writerReactor, readerReactor, readerPort, statePath, serverPort, 
             )
         )
     )
-    downloadProcessorStates = [
-        CompositeState(oaiDownload.getState(), periodicDownload.getState()),
-        scheduledCommitPeriodicCall.getState(),
-    ]
 
     readerServer = readerMain(
             reactor=readerReactor,
             statePath=statePath,
             port=readerPort,
-            downloadProcessorStates=downloadProcessorStates,
             defaultLuceneSettings=defaultLuceneSettings,
             serverPort=serverPort,
         )

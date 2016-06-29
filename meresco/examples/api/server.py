@@ -40,7 +40,7 @@ from meresco.core.processtools import setSignalHandlers, registerShutdownHandler
 from meresco.components import RenameFieldForExact, PeriodicDownload, XmlPrintLxml, XmlXPath, FilterMessages, RewritePartname, XmlParseLxml, CqlMultiSearchClauseConversion, PeriodicCall, Schedule, Rss, RssItem
 from meresco.components.cql import SearchTermFilterAndModifier
 from meresco.components.http import ObservableHttpServer, BasicHttpHandler, PathFilter, Deproxy
-from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer
+from meresco.components.log import LogCollector, ApacheLogWriter, HandleRequestLog, LogCollectorScope, QueryLogWriter, DirectoryLog, LogFileServer, LogComponent
 from meresco.components.sru import SruHandler, SruParser, SruLimitStartRecord
 
 from meresco.oai import OaiDownloadProcessor, UpdateAdapterFromOaiDownloadProcessor, OaiJazz, OaiPmh, OaiAddDeleteRecordWithPrefixesAndSetSpecs
@@ -53,7 +53,6 @@ from meresco.lucene.converttocomposedquery import ConvertToComposedQuery
 from seecr.utils import DebugPrompt
 
 from meresco.components.drilldownqueries import DrilldownQueries
-from meresco.distributed.compositestate import CompositeState
 from storage import StorageComponent
 from storage.storageadapter import StorageAdapter
 
@@ -159,10 +158,6 @@ def main(reactor, port, statePath, indexPort, gatewayPort, **ignored):
             )
         )
     )
-    downloadProcessorStates = lambda: [
-            CompositeState(oaiDownload.getState(), periodicDownload.getState()),
-            scheduledCommitPeriodicCall.getState(),
-        ]
 
     directoryLog = DirectoryLog(join(statePath, 'log'), extension='-query.log')
 
