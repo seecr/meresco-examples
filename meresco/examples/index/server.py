@@ -167,7 +167,7 @@ def writerMain(writerReactor, readerReactor, readerPort, statePath, serverPort, 
             (AllToDo(),
                 (periodicDownload,),
                 (LuceneCommit(host='localhost', port=serverPort,),
-                    (LogComponent(),),
+                    # (LogComponent(),),
                     (http11Request,),
                 )
             )
