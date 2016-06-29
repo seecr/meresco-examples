@@ -27,7 +27,7 @@
 ## end license ##
 
 from os import listdir
-from os.path import join, abspath, dirname
+from os.path import join, abspath, dirname, isdir
 from time import sleep, time
 from traceback import print_exc
 
@@ -37,6 +37,10 @@ from seecr.test.utils import postRequest, sleepWheel
 
 mydir = dirname(abspath(__file__))
 projectDir = dirname(dirname(mydir))
+
+JAVA_BIN="/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre/bin"
+if not isdir(JAVA_BIN):
+    JAVA_BIN="/usr/lib/jvm/java-1.7.0-openjdk/jre/bin"
 
 class ExampleIntegrationState(IntegrationState):
     def __init__(self, stateName, tests=None, fastMode=False):
@@ -106,7 +110,7 @@ class ExampleIntegrationState(IntegrationState):
             stateDir=join(self.integrationTempdir, 'lucene'),
             waitForStart=True,
             core=["oai_dc"],
-            env=dict(JAVA_BIN="/usr/lib/jvm/java-1.7.0-openjdk-amd64/jre/bin", LANG="en_US.UTF-8"))
+            env=dict(JAVA_BIN=JAVA_BIN, LANG="en_US.UTF-8"))
 
     def _createDatabase(self):
         if self.fastMode:
