@@ -25,7 +25,7 @@
 
 from meresco.components import XmlPrintLxml, RewritePartname, XmlXPath, FilterMessages, PeriodicCall, Schedule
 from meresco.components.http import BasicHttpHandler, ObservableHttpServer, PathFilter, Deproxy
-from meresco.components.log import ApacheLogWriter
+from meresco.components.log import ApacheLogWriter, HandleRequestLog, LogCollector
 from meresco.components.sru import SruRecordUpdate
 
 from meresco.core import Observable
@@ -79,49 +79,53 @@ def main(reactor, port, statePath, **ignored):
         (scheduledCommitPeriodicCall,),
         (DebugPrompt(reactor=reactor, port=port+1, globals=locals()),),
         (ObservableHttpServer(reactor=reactor, port=port),
-            (ApacheLogWriter(apacheLogStream),),
-            (Deproxy(),
-                (BasicHttpHandler(),
-                    (PathFilter('/oai', excluding=['/oai/info']),
-                        (OaiPmh(repositoryName='Gateay',
-                                adminEmail='info@example.org',
-                                supportXWait=True
-                            ),
-                            (oaiJazz,),
-                            (oaiSuspendRegister,),
-                            (StorageAdapter(),
-                                (storeComponent,),
-                            ),
-                        )
-                    ),
-                    (PathFilter('/oai/info'),
-                        (OaiInfo(reactor=reactor, oaiPath='/oai'),
-                            (oaiJazz,),
-                        )
-                    ),
-                    (PathFilter('/update'),
-                        (SruRecordUpdate(
-                                sendRecordData=False,
-                                logErrors=True,
-                            ),
-                            (RewritePartname('oai_dc'),
-                                (FilterMessages(allowed=['delete']),
-                                    (storeComponent,),
+            (LogCollector(),
+                (ApacheLogWriter(apacheLogStream),),
+                (Deproxy(),
+                    (HandleRequestLog(),
+                        (BasicHttpHandler(),
+                            (PathFilter('/oai', excluding=['/oai/info']),
+                                (OaiPmh(repositoryName='Gateay',
+                                        adminEmail='info@example.org',
+                                        supportXWait=True
+                                    ),
                                     (oaiJazz,),
-                                ),
-                                (FilterMessages(allowed=['add']),
-                                    (XmlXPath(['srw:recordData/*'], namespaces=namespaces, fromKwarg="lxmlNode"),
-                                        (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=False),
+                                    (oaiSuspendRegister,),
+                                    (StorageAdapter(),
+                                        (storeComponent,),
+                                    ),
+                                )
+                            ),
+                            (PathFilter('/oai/info'),
+                                (OaiInfo(reactor=reactor, oaiPath='/oai'),
+                                    (oaiJazz,),
+                                )
+                            ),
+                            (PathFilter('/update'),
+                                (SruRecordUpdate(
+                                        sendRecordData=False,
+                                        logErrors=True,
+                                    ),
+                                    (RewritePartname('oai_dc'),
+                                        (FilterMessages(allowed=['delete']),
                                             (storeComponent,),
-                                        ),
-                                        (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=['oai_dc']),
                                             (oaiJazz,),
                                         ),
-                                    ),
+                                        (FilterMessages(allowed=['add']),
+                                            (XmlXPath(['srw:recordData/*'], namespaces=namespaces, fromKwarg="lxmlNode"),
+                                                (XmlPrintLxml(fromKwarg='lxmlNode', toKwarg='data', pretty_print=False),
+                                                    (storeComponent,),
+                                                ),
+                                                (OaiAddDeleteRecordWithPrefixesAndSetSpecs(metadataPrefixes=['oai_dc']),
+                                                    (oaiJazz,),
+                                                ),
+                                            ),
+                                        )
+                                    )
                                 )
                             )
                         )
-                    ),
+                    )
                 )
             )
         ),
