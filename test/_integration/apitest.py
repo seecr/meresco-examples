@@ -46,7 +46,7 @@ class ApiTest(IntegrationTestCase):
 
         ddItems = xpath(response, '//drilldown:term-drilldown/drilldown:navigator[@name="dc:subject"]/drilldown:item')
         drilldown = [(i.text, i.attrib['count']) for i in ddItems]
-        self.assertEqual([('Search', '1'), ('Programming', '1')], drilldown)
+        self.assertEqual([('Programming', '1'), ('Search', '1')], drilldown)
 
     def testOai(self):
         header, body = getRequest(self.apiPort, '/oai', dict(verb="ListRecords", metadataPrefix="oai_dc"))
